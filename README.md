@@ -1,4 +1,4 @@
-# CEP Batch 4
+# Azure JavaScript severless chat app
 ## chat application
 
 This is a chat application developed under CEP 0ct21-mar22 program.
