@@ -211,6 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         modal.classList.add('in');
         modal.style = 'display: block;';
+        clearInterval(myInterval);
     }
 
     function getRandom(min, max) {
@@ -303,13 +304,34 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
+    function fetchUserListing(){
+        getUsers(username).then(function (users) {
+            console.log('data', users);
+            // displayUserList(users);
+            storeUserList(users);
+        })
+    }
+
     function storeUserList(data){
         if (data && data.items && data.items.length > 0) {
             if(chatObject.userList.length>0){ // update each userStatus only
                 var items = data.items;
                 for (var i = 0; i < items.length; i++) {
+                    let finduser = false;
                     if(username.toLowerCase() !== data.items[i].name.toLowerCase()){
-                        chatObject.userList[i].status = data.items[i].status;
+                        let obj = chatObject.userList.find((o, k) => {
+                            if (o.name.toLowerCase() == data.items[i].name.toLowerCase()) {
+                                chatObject.userList[k].status = data.items[i].status;
+                                finduser = true;
+                                return true; // stop searching
+                            }
+                            
+                        });
+                        if(!finduser) { // if user not found in chatObject list then add new user
+                            let nItem = data.items[i];
+                            chatObject.userList.push(nItem)
+                            return true;
+                        }
                     }                
                 }
             } else {
@@ -468,12 +490,8 @@ document.addEventListener("DOMContentLoaded", () => {
     messageInput.focus();
 
     // Get user list except loggedin User
-    getUsers(username).then(function (users) {
-        console.log('data', users);
-        // displayUserList(users);
-        storeUserList(users);
-    })
-
+    const myInterval = setInterval(fetchUserListing, 10000);
+    fetchUserListing();
     // adding current user in the DB and making status active in cosmos DB
     // registerUserCosmosDB(username);
     registerUserCosmosDB(username).then(function (user) {
