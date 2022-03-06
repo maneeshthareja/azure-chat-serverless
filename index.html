@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+
+    <title>Azure Realtime Chatbox</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-default fixed-navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Azure Realtime Chatbox</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!-- <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form> -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="curret-user-item"><div style="padding: 15px;"><span>Welcome</span> <span class="current-user"></span></div></li>
+                    <li><a href="javascript:void(0)" data-name="Girish" id="sign-out">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="height: calc(100% - 20px);">
+        <div class="row" style="height: calc(100% - 20px);">
+            <div class="col-sm-3 sidebar">
+                <ul class="list-group user-list">
+                    <li class="list-group-item"><img src="./images/avatar.jpg" alt="Avatar" class="avatar">Group chat
+                    </li>
+                    <li class="list-group-item">Loading...</li>
+                </ul>
+            </div>
+            <div class="col-sm-3">&nbsp;</div>
+            <div class="col-sm-9" style="position: fixed; top: 60px; left: 25%; height: calc(100% - 20px); width: 75%;">
+                <div class="" style="height: calc(100% - 50px);">
+                    <div id="active-chat-name">Group chat</div>
+                    <div id="messages" style="background-color: whitesmoke;"></div>
+                    <div style="width: 100%; border-left-style: ridge; border-right-style: ridge;">
+                        <textarea id="message" style="width: 100%; padding: 5px 10px; border-style: hidden;"
+                            placeholder="Type message and press Enter to send..."></textarea>
+                    </div>
+                    <div style="overflow: auto; border-style: ridge; border-top-style: hidden;">
+                        <form id="upFile" name ="upFile" class="pull-left" style="padding-left: 5px;">
+                            <input type="file" name="filename" id="myFile">
+                            <label for="myFile"><img src="./images/attachment-icon.svg" class="attachment" alt="attachment"></label>
+                        </form>
+                        <button class="btn btn-warning pull-right mr-5" id="echo">Echo</button>
+                        <button class="btn btn-success pull-right mr-5" id="sendmessage">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal alert alert-danger fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>Connection Error...</div>
+                    <div><strong style="font-size: 1.5em;">Hit Refresh/F5</strong> to rejoin. :)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal alert alert-success fade" id="closeModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>Connection Closed</div>
+                    <div><strong style="font-size: 1.5em;">Hit Refresh/F5</strong> to rejoin. :)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Script references. -->
+    <script type="text/javascript" src="scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+
+    <!--Reference the SignalR library. -->
+    <script type="text/javascript" src="scripts/signalr-chat.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "methods": [
+        "post"
+      ],
+      "name": "req",
+      "route": "broadcast"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "signalR",
+      "name": "signalRMessages",
+      "hubName": "serverless",
+      "connectionStringSetting": "AzureSignalRConnectionString",
+      "direction": "out"
+    }
+  ]
+}
