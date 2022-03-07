@@ -84,15 +84,15 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             if (encodedMsg.includes('https://samchatv1.blob.core.windows.net/fileuploadv2/')) {
                 if (encodedMsg.includes('.pdf') || encodedMsg.includes('.doc') || encodedMsg.includes('.docx')) {
-                    entry.innerHTML = '<div class="message-avatar pull-right">' + encodedName + '</div>' +
-                    '<div class="message-content pull-right"><img class="message-content doc" src="./images/document.svg"><a href="' + encodedMsg + '" download>' + encodedMsg + '<a/></div>';
+                    entry.innerHTML = '<div class="message-avatar pull-left">' + encodedName + '</div>' +
+                    '<div class="message-content pull-left"><img class="message-content doc" src="./images/document.svg"><a href="' + encodedMsg + '" download>' + encodedMsg + '<a/></div>';
                 } else {
-                entry.innerHTML = '<div class="message-avatar pull-right">' + encodedName + '</div>' +
-                    '<img class="message-content pull-right" style="width:300px" src="' + encodedMsg + '">';
+                entry.innerHTML = '<div class="message-avatar pull-left">' + encodedName + '</div>' +
+                    '<img class="message-content pull-left" style="width:300px" src="' + encodedMsg + '">';
                 }
             } else {
-                entry.innerHTML = '<div class="message-avatar pull-right">' + encodedName + '</div>' +
-                    '<div class="message-content pull-right">' + encodedMsg + '<div>';
+                entry.innerHTML = '<div class="message-avatar pull-left">' + encodedName + '</div>' +
+                    '<div class="message-content pull-left">' + encodedMsg + '<div>';
             }
         }
         return entry;
@@ -478,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let promptMessage = 'Enter your name:';
     do {
         username = prompt(promptMessage, username);
-        username = username.toLowerCase();
+        username = username? username.toLowerCase(): '';
         if (!username || username.startsWith('_') || username.indexOf('<') > -1 || username.indexOf('>') > -1) {
             username = '';
             promptMessage = 'Invalid input. Enter your name:';
